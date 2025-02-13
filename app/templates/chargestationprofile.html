@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>chargestationprofile</title>
+</head>
+<body>
+    <h1>edit chargestationprofile</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{logform.as_p}}
+    <button type="submit">submit</button></form>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                   <li>{{message}}</li>
+                {% endfor %}
+                </ul>
+        {% endif%}
+</body>
+</html>

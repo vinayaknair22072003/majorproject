@@ -1,0 +1,19 @@
+ {% extends "landingheader.html" %}
+ {% block content %}
+<html>
+    <head>
+        <title>user form</title>
+</head>
+<body>
+    <center>
+    {% comment %} <h1>create user</h1> {% endcomment %}
+    <form method="post" >
+        {% csrf_token %}
+        {{form.as_p}}
+        {{logform.as_p}}
+        
+    <button type="submit">submit</button></form>
+    </center>
+</body>
+</html>
+{% endblock%}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        search station: <input type="text" name="search" />
+        <button type="submit">search</button> 
+    </form>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <p class="error">{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+    {% if stations  %}
+    <table border='1'>
+        <tr>
+            <td>state</td>
+            <td>district</td>
+            <td>city</td>
+            <td>location</td>
+        </tr>
+        {% for station in stations %}
+        <tr>
+            <td>{{station.state}}</td>
+            <td>{{station.district}}</td>
+            <td>{{station.city}}</td>
+            <td>{{station.location}}</td>
+        </tr>
+        {% endfor %}
+             
+
+
+    {% endif %}
+</body>

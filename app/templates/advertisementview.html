@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>user form</title>
+</head>
+<body>
+    <h1>create user</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{logform.as_p}}
+    <button type="submit">submit</button></form>
+</body>
+</html>

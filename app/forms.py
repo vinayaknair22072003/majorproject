@@ -1,0 +1,39 @@
+from django import forms
+from.models import User,Login,Station,Advertisement
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['name','contact']
+
+class LoginCheck(forms.ModelForm):
+    class Meta:
+        model=Login
+        fields=['email', 'password']
+
+
+class LoginForm(forms.Form):
+    email=forms.CharField(max_length=100)
+    password=forms.CharField(widget=forms.PasswordInput)
+    
+
+class Logineditform(forms.ModelForm):
+    class Meta:
+        model=Login
+        fields=['email']
+
+class StationForm(forms.ModelForm):
+    class Meta:
+        model=Station
+        fields=['state','district','city','location']
+    
+class AdvertisementForm(forms.ModelForm):
+    class Meta:
+        model=Advertisement
+        fields=['media']
+
+
+
+
+    
+
