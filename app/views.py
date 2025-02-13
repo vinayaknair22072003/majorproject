@@ -199,6 +199,9 @@ def advertisement_delete(request,id):
     a.delete()
     return redirect('advertisememnt_view_user')
 
+def slotbooking(request):
+    return render(request,'slotbooking.html')
+
 
 
 
