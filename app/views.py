@@ -194,6 +194,13 @@ def advertisement_edit(request,id):
          form = AdvertisementForm(instance=a)
     return render(request,'advertisementremove.html', {'forms': form})
 
+def advertisement_delete(request,id):
+    a=get_object_or_404(Advertisement,id=id)
+    a.delete()
+    return redirect('advertisememnt_view_user')
+
+
+
 
 
 
