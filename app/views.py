@@ -199,8 +199,31 @@ def advertisement_delete(request,id):
     a.delete()
     return redirect('advertisememnt_view_user')
 
-def slotbooking(request):
-    return render(request,'slotbooking.html')
+
+
+def slotbookings(request, login_id):
+    user = request.session.get('user_id') 
+    login = get_object_or_404(Login, id=user)
+    
+    station = get_object_or_404(Station, login_id__id=login_id)  
+    
+    if request.method == 'POST':
+        form = slotbook(request.POST)
+        if form.is_valid():
+            a = form.save(commit=False)
+            a.user_id = login  
+            a.login_id = station.login_id 
+            a.save() 
+            
+            return redirect('userhome')  
+    else:
+        form = slotbook()
+
+    return render(request, 'slotbooking.html', {'form': form})
+
+
+
+
 
 
 

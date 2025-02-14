@@ -26,7 +26,7 @@ urlpatterns = [
     path('advertisement_edit/<int:id>',views.advertisement_edit,name='advertisement_edit'),
     path('advertisememnt_view_user',views.advertisememnt_view_user,name='advertisememnt_view_user'),
     path('advertisement_delete/<int:id>',views.advertisement_delete,name='advertisement_delete'),
-    path('slotbooking',views.slotbooking,name='slotbooking'),
+    path('slotbookings/<int:login_id>/', views.slotbookings, name='slotbookings')
     
 
     

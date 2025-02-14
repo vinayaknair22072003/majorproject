@@ -32,6 +32,8 @@
             <td>{{station.district}}</td>
             <td>{{station.city}}</td>
             <td>{{station.location}}</td>
+
+            <td><a href="{% url 'slotbookings' station.login_id.id %}">slotbooking</a></td>
         </tr>
         {% endfor %}
              

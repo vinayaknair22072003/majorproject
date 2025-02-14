@@ -22,6 +22,17 @@ class Advertisement(models.Model):
     media=models.FileField(upload_to='uploads/')
     station_id=models.ForeignKey(Station,on_delete=models.CASCADE,null=True,blank=True)
 
+class slotbooking(models.Model):
+    login_id = models.ForeignKey(Login, related_name='station_login', on_delete=models.CASCADE)  # This now points directly to the Login
+    user_id = models.ForeignKey(Login, related_name='user_login', on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+    current_date = models.DateField(auto_now_add=True)
+
+
+
+    
+
 
 
 

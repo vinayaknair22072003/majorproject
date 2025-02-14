@@ -1,5 +1,5 @@
 from django import forms
-from.models import User,Login,Station,Advertisement
+from.models import *
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -31,6 +31,13 @@ class AdvertisementForm(forms.ModelForm):
     class Meta:
         model=Advertisement
         fields=['media']
+
+class slotbook(forms.ModelForm):
+    class Meta:
+        model=slotbooking
+        fields=['date','time']
+
+
 
 
 
