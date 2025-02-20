@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from.forms import *
-from.models import User,Login,Station
+from.models import *
 from django.contrib import messages
 from django.db.models import Q
 
@@ -248,12 +248,25 @@ def slotdelete(request,id):
     a.delete()
     return redirect('slotbookingview')
 
+
 def slotstationview(request):
-     s = request.session.get('station_id')
-     data = get_object_or_404(Login,id=s)
-     userdetails=get_object_or_404(User,login_id=data)
-     a=slotbooking.objects.filter(login_id=userdetails)
-     return render(request,'slotstationview.html',{'a':a})
+    station_id = request.session.get('station_id')
+    station_login = Login.objects.get(id=station_id)
+    booked_slots = slotbooking.objects.filter(login_id=station_login)
+    slots_with_user_info = []
+    for slot in booked_slots:
+        user_info = User.objects.get(login_id=slot.user_id)
+        slots_with_user_info.append({
+            'date': slot.date,
+            'time': slot.time,
+            'user_name': user_info.name,
+            'user_contact': user_info.contact,
+        })
+    context = {
+        'booked_slots': slots_with_user_info,
+    }
+    
+    return render(request, 'slotstationview.html', context)
 
 
 

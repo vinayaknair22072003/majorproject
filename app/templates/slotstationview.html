@@ -1,36 +1,38 @@
 {% extends "stationheader.html" %}
+
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Slot Bookings</title>
 </head>
 <body>
-    <table class="display table table-striped table-hover">
-        <tr>
-            <th>Name</th>
-            <th>Contacts</th>
-            <th>Date</th>
-            <th>Time</th>
-            
-        </tr>
-        {% for a in a %}
-           
-        <tr>
-            <td>{{a.name}}</td>
-            <td>{{a.contact}}</td>
-            <td>{{a.date}}</td>
-            <td>{{a.time}}</td>
-            
-        </tr>
-
-        {% endfor %}
-    
-    </table>    
-  
-    
+    {% if booked_slots %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>User Name</th>
+                    <th>User Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for slot in booked_slots %}
+                    <tr>
+                        <td>{{ slot.date }}</td>
+                        <td>{{ slot.time }}</td>
+                        <td>{{ slot.user_name }}</td>
+                        <td>{{ slot.user_contact }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No booked slots found for this station.</p>
+    {% endif %}
 </body>
 </html>
 {% endblock %}
