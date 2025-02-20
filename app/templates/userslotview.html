@@ -1,0 +1,45 @@
+{% extends "userheader.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="display table table-striped table-hover">
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+        </tr>
+        {% for a in a %}
+           
+        <tr>
+            <td>{{a.date}}</td>
+            <td>{{a.time}}</td>
+            <td>
+                <button class="btn btn-primary">
+                    <a href="{% url "slotedit" a.id %}" style="color: white;text-decoration: none;">Edit</a>
+                </button> 
+            </td>   
+            <td>
+                <button class="btn btn-danger">
+                    <a style="color: white;text-decoration: none;" href="{% url "slotdelete" a.id %}">Delete</a>
+                </button> 
+            </td>
+
+
+        </tr>
+
+        {% endfor %}
+    
+    </table>    
+  
+    
+</body>
+</html>
+{% endblock %}

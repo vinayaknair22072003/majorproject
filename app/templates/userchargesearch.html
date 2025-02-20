@@ -1,9 +1,28 @@
-<!DOCTYPE html>
+{% extends "userheader.html" %}
+{% block content %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
+    <style> 
+        form {
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        table {
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <form method="post">
@@ -11,33 +30,35 @@
         search station: <input type="text" name="search" />
         <button type="submit">search</button> 
     </form>
+
     {% if messages %}
     <div class="messages">
         {% for message in messages %}
             <p class="error">{{ message }}</p>
         {% endfor %}
     </div>
-{% endif %}
-    {% if stations  %}
-    <table border='1'>
+    {% endif %}
+
+    {% if stations %}
+    <table border='1' class="table table-striped">
         <tr>
-            <td>state</td>
-            <td>district</td>
-            <td>city</td>
-            <td>location</td>
+            <th>state</th>
+            <th>district</th>
+            <th>city</th>
+            <th>location</th>
+            <th></th>
         </tr>
         {% for station in stations %}
         <tr>
-            <td>{{station.state}}</td>
-            <td>{{station.district}}</td>
-            <td>{{station.city}}</td>
-            <td>{{station.location}}</td>
-
-            <td><a href="{% url 'slotbookings' station.login_id.id %}">slotbooking</a></td>
+            <td>{{ station.state }}</td>
+            <td>{{ station.district }}</td>
+            <td>{{ station.city }}</td>
+            <td>{{ station.location }}</td>
+            <td class="btn btn-primary"><a href="{% url 'slotbookings' station.login_id.id %}">slotbooking</a></td>
         </tr>
         {% endfor %}
-             
-
-
+    </table>
     {% endif %}
 </body>
+</html>
+{% endblock %}

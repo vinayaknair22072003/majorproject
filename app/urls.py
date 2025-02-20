@@ -26,12 +26,10 @@ urlpatterns = [
     path('advertisement_edit/<int:id>',views.advertisement_edit,name='advertisement_edit'),
     path('advertisememnt_view_user',views.advertisememnt_view_user,name='advertisememnt_view_user'),
     path('advertisement_delete/<int:id>',views.advertisement_delete,name='advertisement_delete'),
-    path('slotbookings/<int:login_id>/', views.slotbookings, name='slotbookings')
+    path('slotbookings/<int:login_id>/', views.slotbookings, name='slotbookings'),
+    path('slotbookingview',views.slotbookingview,name='slotbookingview'),
+    path('slotedit/<int:id>',views.slotedit,name='slotedit'),
+    path('slotdelete/<int:id>',views.slotdelete,name='slotdelete'),
+    path('slotstationview',views.slotstationview,name='slotstationview'),
     
-
-    
-
-    
-    
-
-   ]   +static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+]+static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

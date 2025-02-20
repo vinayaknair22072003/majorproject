@@ -221,31 +221,39 @@ def slotbookings(request, login_id):
 
     return render(request, 'slotbooking.html', {'form': form})
 
+def slotbookingview(request):
+    a=slotbooking.objects.all()
+    return render(request,'userslotview.html',{'a':a})
+
+def slotedit(request,id):
+    user = request.session['user_id'] 
+    login = get_object_or_404(Login, id=user)
+    a=get_object_or_404(slotbooking,id=id)
+    stationid=a.user_id.id
+    station = get_object_or_404(Station, id=stationid)  
+    if request.method == 'POST':
+        form = slotbook(request.POST, instance=a)
+        if form.is_valid():
+            b = form.save(commit=False)
+            b.user_id = station
+            b.login_id = station.login_id 
+            b.save() 
+            return redirect('slotbookingview')  
+    else:
+         form = slotbook(instance=a)
+    return render(request,'slotbooking.html', {'form': form})
+
+def slotdelete(request,id):
+    a=get_object_or_404(slotbooking,id=id)
+    a.delete()
+    return redirect('slotbookingview')
+
+def slotstationview(request):
+     s = request.session.get('station_id')
+     data = get_object_or_404(Login,id=s)
+     userdetails=get_object_or_404(User,login_id=data)
+     a=slotbooking.objects.filter(login_id=userdetails)
+     return render(request,'slotstationview.html',{'a':a})
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

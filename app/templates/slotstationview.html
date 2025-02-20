@@ -1,0 +1,36 @@
+{% extends "stationheader.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="display table table-striped table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Contacts</th>
+            <th>Date</th>
+            <th>Time</th>
+            
+        </tr>
+        {% for a in a %}
+           
+        <tr>
+            <td>{{a.name}}</td>
+            <td>{{a.contact}}</td>
+            <td>{{a.date}}</td>
+            <td>{{a.time}}</td>
+            
+        </tr>
+
+        {% endfor %}
+    
+    </table>    
+  
+    
+</body>
+</html>
+{% endblock %}
