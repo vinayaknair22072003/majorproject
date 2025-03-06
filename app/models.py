@@ -28,11 +28,13 @@ class slotbooking(models.Model):
     date = models.DateField()
     time = models.TimeField()
     current_date = models.DateField(auto_now_add=True)
+    cancel_status=models.IntegerField(default=0)
     
-
-
-
-
+class feedback(models.Model):
+    login_id = models.ForeignKey(Login,on_delete=models.CASCADE)
+    feedback = models.TextField(blank=True,null=True)  
+    station_id = models.ForeignKey(Station,on_delete=models.CASCADE)
+    current_date = models.DateField(auto_now_add=True)
 
 
    

@@ -17,6 +17,7 @@
                     <th>Time</th>
                     <th>User Name</th>
                     <th>User Contact</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,16 @@
                         <td>{{ slot.time }}</td>
                         <td>{{ slot.user_name }}</td>
                         <td>{{ slot.user_contact }}</td>
+                        <td>
+                           
+                            {% if slot.cancel_status == 1 %}
+                                Cancelled
+                            {% else %}
+                                Active
+                            {% endif %}
+                        </td>
+                        
+                       
                     </tr>
                 {% endfor %}
             </tbody>

@@ -1,8 +1,11 @@
+{% extends 'userheader.html' %}
+{% block content %}
 <html>
     <head>
         <title>user form</title>
 </head>
 <body>
+    <center>
     <h1>edit users</h1>
     <form method="post">
         {% csrf_token %}
@@ -16,5 +19,7 @@
                 {% endfor %}
                 </ul>
         {% endif%}
+    </center>
 </body>
 </html>
+{% endblock %}

@@ -13,7 +13,7 @@
             <th>Date</th>
             <th>Time</th>
             <th>Edit</th>
-            <th>Delete</th>
+            <th></th>
 
         </tr>
         {% for a in a %}
@@ -23,13 +23,19 @@
             <td>{{a.time}}</td>
             <td>
                 <button class="btn btn-primary">
-                    <a href="{% url "slotedit" a.id %}" style="color: white;text-decoration: none;">Edit</a>
+                    <a href="{% url 'slotedit' a.id %}" style="color: white;text-decoration: none;">Edit</a>
                 </button> 
             </td>   
             <td>
+                {% if a.cancel_status == 0 %}
                 <button class="btn btn-danger">
-                    <a style="color: white;text-decoration: none;" href="{% url "slotdelete" a.id %}">Delete</a>
+                    <a style="color: white;text-decoration: none;" href="{% url 'slot_cancel' a.id %}">cancel</a>
                 </button> 
+                {% else %} 
+                <button class="btn btn-danger">
+                    <a style="color: white;text-decoration: none;" href="{% url 'slot_delete' a.id %}">Delete</a>
+                </button> 
+                {% endif %}
             </td>
 
 

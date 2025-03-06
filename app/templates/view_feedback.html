@@ -1,0 +1,18 @@
+{% extends 'userheader.html' %}
+{% block content %}
+<html>
+    <head>
+        <title>user form</title>
+</head>
+<body>
+    <center>
+        <h1>Feedbacks</h1>
+    {% for a in form %}
+    <ul style="list-style: none;">
+        <li>feedback : {{a.feedback}}</li>
+    </ul>
+    {% endfor %}
+    </center>
+</body>
+</html>
+{% endblock %}

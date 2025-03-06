@@ -1,16 +1,15 @@
-{% extends 'stationheader.html' %}
+{% extends 'userheader.html' %}
 {% block content %}
 <html>
     <head>
-        <title>chargestationprofile</title>
+        <title>user form</title>
 </head>
 <body>
     <center>
-    <h1>edit chargestationprofile</h1>
+    <h1>edit users</h1>
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
-        {{logform.as_p}}
     <button type="submit">submit</button></form>
         {% if messages %}
             <ul>

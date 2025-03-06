@@ -29,7 +29,9 @@ urlpatterns = [
     path('slotbookings/<int:login_id>/', views.slotbookings, name='slotbookings'),
     path('slotbookingview',views.slotbookingview,name='slotbookingview'),
     path('slotedit/<int:id>',views.slotedit,name='slotedit'),
-    path('slotdelete/<int:id>',views.slotdelete,name='slotdelete'),
+    path('slot_cancel/<int:id>',views.slot_cancel,name='slot_cancel'),
     path('slotstationview',views.slotstationview,name='slotstationview'),
-    
+    path('slot_delete/<int:id>',views.slot_delete,name='slot_delete'),
+    path('feedback/<int:id>',views.feedbacks,name='feedback'),
+    path('view_feedback/<int:id>',views.view_feedback,name='view_feedback'),
 ]+static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

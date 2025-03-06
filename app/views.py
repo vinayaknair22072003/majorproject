@@ -243,7 +243,12 @@ def slotedit(request,id):
          form = slotbook(instance=a)
     return render(request,'slotbooking.html', {'form': form})
 
-def slotdelete(request,id):
+def slot_cancel(request,id):
+    a=get_object_or_404(slotbooking,id=id)
+    a.cancel_status=1
+    a.save()
+    return redirect('slotbookingview')
+def slot_delete(request,id):
     a=get_object_or_404(slotbooking,id=id)
     a.delete()
     return redirect('slotbookingview')
@@ -261,6 +266,7 @@ def slotstationview(request):
             'time': slot.time,
             'user_name': user_info.name,
             'user_contact': user_info.contact,
+            'cancel_status': slot.cancel_status
         })
     context = {
         'booked_slots': slots_with_user_info,
@@ -268,5 +274,25 @@ def slotstationview(request):
     
     return render(request, 'slotstationview.html', context)
 
+def feedbacks(request,id):
+    if request.method == 'POST':
+        form = feedbackform(request.POST)
+        if form.is_valid():
+            a=form.save(commit= False)
+            user=get_object_or_404(Login,id=request.session['user_id'])
+            stationlogin = get_object_or_404(Login,id = id)
+            station = get_object_or_404(Station,login_id = stationlogin)
+            a.login_id = user   
+            a.station_id = station
+            a.save()
+            return redirect('stationsearch')
+    else:
+          form = feedbackform()
+    return render(request,'feedback.html',{'form': form})
+        
 
-
+def view_feedback(request,id):
+    a=get_object_or_404(Login,id=id)
+    station=get_object_or_404(Station,login_id=a)
+    form=feedback.objects.filter(station_id=station.id)
+    return render(request,'view_feedback.html',{'form': form})

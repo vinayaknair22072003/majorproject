@@ -37,7 +37,10 @@ class slotbook(forms.ModelForm):
         model=slotbooking
         fields=['date','time']
 
-
+class feedbackform(forms.ModelForm):
+    class Meta:
+        model=feedback
+        fields=['feedback']
 
 
 
