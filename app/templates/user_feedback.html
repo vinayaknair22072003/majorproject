@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>My Feedback</title>
+</head>
+<style>
+div{
+    background-color: rgb(15, 74, 125);
+    height: 100px;
+    width: 400px;
+    padding-top: 50px;
+    color: white;
+    border-radius: 30px;
+}
+</style>
+<body>
+    <center>
+        <h1>My Feedback</h1>
+        {% for feedback in feedback_entries %}
+        <ul style="list-style: none;">
+            <div >
+                <li >{{ feedback.feedback }} <br> station location : {{ feedback.station_id.location }}</li>
+                <li>
+                    <a href="{% url 'edit_feedback' feedback.id %}">
+                        <button style="width: 70px; height: 20px; font-size: 14px;">Edit</button>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'delete_feedback' feedback.id %}">
+                        <button style="width: 70px; height: 20px; font-size: 14px;">Delete</button>
+                    </a>
+                </li>
+            </div>
+
+        </ul>
+        {% endfor %}
+    </center>
+</body>
+</html>
+

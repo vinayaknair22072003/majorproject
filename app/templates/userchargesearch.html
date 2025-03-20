@@ -15,7 +15,7 @@
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-            border-collapse: collapse;
+            border-collapse: separate;
         }
 
         table td, table th {
@@ -57,6 +57,7 @@
             <td class="btn btn-primary"><a href="{% url 'slotbookings' station.login_id.id %}">slotbooking</a></td>
             <td class="btn btn-primary"><a href="{% url 'feedback' station.login_id.id %}">feedback</a></td>
             <td class="btn btn-primary"><a href="{% url 'view_feedback' station.login_id.id %}">view feedback</a></td>
+            
             
         </tr>
         {% endfor %}

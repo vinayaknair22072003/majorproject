@@ -199,8 +199,6 @@ def advertisement_delete(request,id):
     a.delete()
     return redirect('advertisememnt_view_user')
 
-
-
 def slotbookings(request, login_id):
     user = request.session.get('user_id') 
     login = get_object_or_404(Login, id=user)
@@ -210,16 +208,28 @@ def slotbookings(request, login_id):
     if request.method == 'POST':
         form = slotbook(request.POST)
         if form.is_valid():
-            a = form.save(commit=False)
-            a.user_id = login  
-            a.login_id = station.login_id 
-            a.save() 
+            date = form.cleaned_data['date']
+            time = form.cleaned_data['time']
             
-            return redirect('userhome')  
+            existing_booking = slotbooking.objects.filter(
+                login_id=station.login_id,
+                date=date,
+                time=time
+            ).exists()  
+            
+            if existing_booking:
+                form.add_error(None, "This slot is already booked by another user.")
+            else:
+                a = form.save(commit=False)
+                a.user_id = login  
+                a.login_id = station.login_id 
+                a.save() 
+                return redirect('userhome')  
     else:
         form = slotbook()
 
     return render(request, 'slotbooking.html', {'form': form})
+
 
 def slotbookingview(request):
     a=slotbooking.objects.all()
@@ -296,3 +306,50 @@ def view_feedback(request,id):
     station=get_object_or_404(Station,login_id=a)
     form=feedback.objects.filter(station_id=station.id)
     return render(request,'view_feedback.html',{'form': form})
+
+def user_feedback(request):
+    # Retrieve the logged-in user's session ID
+    user_id = request.session.get('user_id')
+    a=get_object_or_404(Login,id=user_id)
+    # Get the user's feedback entries
+    feedback_entries = feedback.objects.filter(login_id=a)
+    return render(request, 'user_feedback.html', {'feedback_entries': feedback_entries})
+
+def edit_feedback(request,id):
+    feedback_instance = get_object_or_404(feedback, id=id, login_id=request.session.get('user_id'))
+    if request.method == 'POST':
+        form = feedbackform(request.POST, instance=feedback_instance)
+        if form.is_valid():   
+            form.save()
+            return redirect('user_feedback') 
+    else:
+        form = feedbackform(instance=feedback_instance)
+    return render(request, 'edit_feedback.html', {'form': form})
+
+def delete_feedback(request,id):
+    a=get_object_or_404(feedback,id=id)
+    a.delete()
+    return redirect('user_feedback')
+
+def complaint_add(request):
+    userid=request.session.get('user_id')
+    log=get_object_or_404(Login,id=userid)
+    if request.method == 'POST':
+        form = complaintform(request.POST)
+        if form.is_valid():
+            a=form.save(commit= False)
+            a.user_logid=log
+            a.save() 
+            return redirect('userhome')
+    else:
+          form = complaintform()
+    return render(request,'complaints.html',{'form': form})
+
+def view_complaints(request):
+    complaint = complaints.objects.all()  # Fetch all complaints
+    return render(request, 'admin_complaints.html', {'complaints': complaint})
+
+
+
+
+   

@@ -8,17 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <center>
-    
-    <form method="post" action="">
-       
-    <h1>slotbooking</h1>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">submit</button>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Delete</button>
     </form>
-</center>
-    
 </body>
 </html>
 {% endblock %}

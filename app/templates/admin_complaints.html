@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin - Complaints</title>
+</head>
+<body>
+    <h1>All Complaints</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Email</th>
+                <th>Complaint</th>
+                <th>Date Submitted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.id }}</td>
+                <td>{{ complaint.user_logid.email }}</td>
+                <td>{{ complaint.complaint }}</td> <!-- Assuming 'description' is a field in your Complaint model -->
+                <td>{{ complaint.current_date }}</td> <!-- Replace with your timestamp field -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -42,6 +42,10 @@ class feedbackform(forms.ModelForm):
         model=feedback
         fields=['feedback']
 
+class complaintform(forms.ModelForm):
+    class Meta:
+        model=complaints
+        fields=['complaint']
 
 
 

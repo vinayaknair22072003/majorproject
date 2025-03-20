@@ -36,6 +36,13 @@ class feedback(models.Model):
     station_id = models.ForeignKey(Station,on_delete=models.CASCADE)
     current_date = models.DateField(auto_now_add=True)
 
+class complaints(models.Model):
+    user_logid = models.ForeignKey(Login, on_delete=models.CASCADE)
+    complaint=models.TextField(max_length=100)
+    current_date=models.DateField(auto_now_add=True)
+    
+    
+
 
    
 

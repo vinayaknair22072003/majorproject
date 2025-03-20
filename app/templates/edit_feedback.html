@@ -5,20 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Feedback</title>
 </head>
 <body>
     <center>
-    
-    <form method="post" action="">
-       
-    <h1>slotbooking</h1>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">submit</button>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
     </form>
 </center>
-    
 </body>
 </html>
 {% endblock %}
