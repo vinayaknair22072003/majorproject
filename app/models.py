@@ -40,6 +40,7 @@ class complaints(models.Model):
     user_logid = models.ForeignKey(Login, on_delete=models.CASCADE)
     complaint=models.TextField(max_length=100)
     current_date=models.DateField(auto_now_add=True)
+    reply=models.CharField(max_length=106,null=True)
     
     
 

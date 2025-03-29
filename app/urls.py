@@ -39,4 +39,9 @@ urlpatterns = [
     path('delete_feedback/<int:id>',views.delete_feedback, name='delete_feedback'),
     path('complaint_add',views.complaint_add, name='complaint_add'),
     path('view_complaints/',views.view_complaints, name='view_complaints'),
+    path('user_viewcomplaints/',views.user_viewcomplaints, name='user_viewcomplaints'),
+    path('edit_complaint/<int:id>/',views.edit_complaint, name='edit_complaint'),
+    path('delete_complaint/<int:id>/',views.delete_complaint, name='delete_complaint'),
+    path('complaint_reply/<int:id>/',views.complaint_reply, name='complaint_reply'),
+
 ]+static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

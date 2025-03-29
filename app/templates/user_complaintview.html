@@ -1,0 +1,25 @@
+{% extends "userheader.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+        <table class="table table-striped">
+                <tr>
+                    <th>Complaint</th>
+                </tr>
+                {% for a in complaints %}
+                    <tr>
+                        <td>{{ a.complaint }}</td>
+                        <td><a href="{% url 'edit_complaint' a.id %}">Edit</a></td>
+                        <td><a href="{% url 'delete_complaint' a.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+        </table>
+</body>
+</html>
+{% endblock %}

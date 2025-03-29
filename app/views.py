@@ -349,7 +349,46 @@ def view_complaints(request):
     complaint = complaints.objects.all()  # Fetch all complaints
     return render(request, 'admin_complaints.html', {'complaints': complaint})
 
+def user_viewcomplaints(request):
+    complaint = complaints.objects.all()  # Fetch all complaints
+    return render(request, 'user_complaintview.html', {'complaints': complaint})
+
+def edit_complaint(request,id):
+    cmt=get_object_or_404(complaints,id=id)
+    if request.method == 'POST':
+        form = complaintform(request.POST, instance=cmt)
+        if form.is_valid():   
+            form.save()
+            return redirect('user_viewcomplaints') 
+    else:
+        form = complaintform(instance=cmt)
+    return render(request, 'Edit_complaints.html', {'form': form})
+
+def delete_complaint(request,id):
+    cmt=get_object_or_404(complaints,id=id)
+    cmt.delete()
+    return redirect('user_viewcomplaints')
+
+def complaint_reply(request,id):
+    cmt=get_object_or_404(complaints,id=id)
+    if request.method=='POST':
+        form=replyform(request.POST)
+        if form.is_valid():
+            cmt.reply=form.cleaned_data['reply']
+            cmt.save()
+            return redirect('adminhome')
+    else:
+        form=replyform(initial={'reply':cmt.reply})
+    return render(request,'admin_complaintreply.html',{'form':form,'cmt':cmt})
+    
 
 
 
-   
+
+
+
+
+
+
+
+
