@@ -224,7 +224,7 @@ def slotbookings(request, login_id):
                 a.user_id = login  
                 a.login_id = station.login_id 
                 a.save() 
-                return redirect('userhome')  
+                return redirect('payment',a.id)  
     else:
         form = slotbook()
 
@@ -382,8 +382,22 @@ def complaint_reply(request,id):
     return render(request,'admin_complaintreply.html',{'form':form,'cmt':cmt})
     
 
-
-
+def payment(request,id):
+    slotid=get_object_or_404(slotbooking,id=id)
+    log=request.session.get('user_id')
+    logid=get_object_or_404(User,login_id=log)
+    if request.method=='POST':
+        form=paymentform(request.POST)
+        if form.is_valid():
+            a = form.save(commit = false)
+            a.login_id = logid
+            a.bookingid = slotid
+            a.save()
+            return redirect('payment')
+    else:
+        form=paymentform()
+    return render(request,'payments.html',{'form':form})
+    
 
 
 

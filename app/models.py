@@ -41,6 +41,18 @@ class complaints(models.Model):
     complaint=models.TextField(max_length=100)
     current_date=models.DateField(auto_now_add=True)
     reply=models.CharField(max_length=106,null=True)
+
+class payment(models.Model):
+    cardownername=models.CharField(max_length=25)
+    cardno = models.CharField(max_length=15)
+    cvv = models.CharField(max_length=5)
+    expmonth_year = models.IntegerField()
+    amount = models.IntegerField(default=0)
+    bookingid = models.ForeignKey(slotbooking,on_delete=models.CASCADE,null=True,blank=True)
+    login_id = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
+    current_date = models.DateTimeField(auto_now_add=True)
+   
+
     
     
 

@@ -52,6 +52,7 @@ class replyform(forms.ModelForm):
         model=complaints
         fields=['reply']
 
-
-    
-
+class paymentform(forms.ModelForm):
+    class Meta:
+        model=payment
+        fields=['cardownername','cardno','cvv','expmonth_year']
