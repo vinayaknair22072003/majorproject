@@ -380,11 +380,24 @@ def complaint_reply(request,id):
     else:
         form=replyform(initial={'reply':cmt.reply})
     return render(request,'admin_complaintreply.html',{'form':form,'cmt':cmt})
-    
+
+def charging_station_fee(request):
+    log = request.session.get('station_id')
+    logid = get_object_or_404(Station,login_id=log)
+    if request.method == 'POST':
+        fare = request.POST.get('fare')
+        logid.fare = fare
+        logid.save()
+        messages.success(request, 'Fare updated successfully.')
+        return redirect('chargestataionhome')
+    else:
+        form = StationForm(instance=logid)
+    return render(request,'chargestation_fare.html')    
 
 def payment(request,id):
     slotid=get_object_or_404(slotbooking,id=id)
     log=request.session.get('user_id')
+    stationfare = get_object_or_404(Station,login_id=slotid.login_id.id)
     logid=get_object_or_404(User,login_id=log)
     if request.method=='POST':
         form=paymentform(request.POST)
@@ -392,11 +405,12 @@ def payment(request,id):
             a = form.save(commit = false)
             a.login_id = logid
             a.bookingid = slotid
+            a.amount = stationfare.fare
             a.save()
             return redirect('payment')
     else:
         form=paymentform()
-    return render(request,'payments.html',{'form':form})
+    return render(request,'payments.html',{'form':form,'stationfare':stationfare})
     
 
 

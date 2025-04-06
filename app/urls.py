@@ -44,5 +44,7 @@ urlpatterns = [
     path('delete_complaint/<int:id>/',views.delete_complaint, name='delete_complaint'),
     path('complaint_reply/<int:id>/',views.complaint_reply, name='complaint_reply'),
     path('payment/<int:id>',views.payment, name='payment'),
+    path('charging_station_fee',views.charging_station_fee, name='charging_station_fee'),
+
 
 ]+static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

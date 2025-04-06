@@ -16,6 +16,7 @@ class Station(models.Model):
     district=models.CharField(max_length=60)
     city=models.CharField(max_length=60)
     location=models.CharField(max_length=60)
+    fare=models.CharField(max_length=60, null=True, blank=True)
     login_id=models.ForeignKey(Login,on_delete=models.CASCADE)
     
 class Advertisement(models.Model):

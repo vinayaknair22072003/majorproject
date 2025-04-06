@@ -1,0 +1,21 @@
+{% extends 'stationheader.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charging Station Fare</title>
+</head>
+<body>
+    <h1>Set Charging Station Booking Fee</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="booking_fee">Booking Fee (in INR):</label><br>
+        <input type="number" id="booking_fee" name="fare" step="0.01" required><br><br>
+
+        <button type="submit">Save Fee</button>
+    </form>
+</body>
+</html>
+{% endblock %}
